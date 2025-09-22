@@ -1,0 +1,26 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GodotKFO"
+config/description="A fancy schmancy Godot-based KFO experiment"
+run/main_scene="uid://dlcbumu066hdh"
+config/features=PackedStringArray("4.5", "Forward Plus")
+config/icon="res://icon.svg"
+
+[file_customization]
+
+folder_colors={
+"res://ClientTypes/": "blue",
+"res://Interface/": "green",
+"res://Protocols/": "purple",
+"res://RefCounted/": "pink"
+}

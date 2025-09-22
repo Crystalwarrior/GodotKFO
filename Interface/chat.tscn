@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4hmbhx5i0bfy"]
+
+[ext_resource type="Script" uid="uid://cekweyuuvlrpf" path="res://Interface/chat.gd" id="1_576eh"]
+[ext_resource type="Script" uid="uid://bpk5j7h3uw850" path="res://Interface/ic_tab.gd" id="1_dg5i7"]
+[ext_resource type="Script" uid="uid://cal7pradmsk6r" path="res://Interface/ooc_tab.gd" id="3_jmgow"]
+
+[node name="Chat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_576eh")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="ICTab" type="PanelContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_dg5i7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ICTab"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/ICTab/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ICLogs" type="RichTextLabel" parent="HSplitContainer/ICTab/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="ICMessageInput" type="TextEdit" parent="HSplitContainer/ICTab/VBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+placeholder_text = "Type your IC message here..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="OOCTab" type="PanelContainer" parent="HSplitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_jmgow")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/OOCTab"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/OOCTab/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OOCLogs" type="RichTextLabel" parent="HSplitContainer/OOCTab/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/OOCTab/VBoxContainer"]
+layout_mode = 2
+
+[node name="OOCNameInput" type="LineEdit" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+placeholder_text = "OOC Name"
+clear_button_enabled = true
+
+[node name="VSeparator" type="VSeparator" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="OOCMessageInput" type="TextEdit" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type your OOC message here..."
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_blink = true
