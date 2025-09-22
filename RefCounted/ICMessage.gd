@@ -1,8 +1,8 @@
 extends RefCounted
 class_name ICMessage
 
-# I still dunno what "MC" even stands for
-const HEADER = "MC"
+# I still dunno what "MS" even stands for
+const HEADER = "MS"
 
 var desk_mod: int
 var preanim: String
@@ -37,7 +37,7 @@ var effect: String
 var blips: String
 
 static func from_packet(packet: AOPacket) -> ICMessage:
-	if packet.header != "MC":
+	if packet.header != "MS":
 		push_error("ICMessage from_packet: wrong header! (%s)" % packet.header)
 	return ICMessage.new(packet.contents)
 
