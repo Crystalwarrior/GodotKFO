@@ -34,9 +34,9 @@ func _init(_header: String = "", _contents: PackedStringArray = []) -> void:
 	contents = _contents
 
 func get_packet_string(encoded: bool = false):
-	var _contents: PackedStringArray = contents.duplicate()
+	var _contents: PackedStringArray = contents
 	if encoded:
-		escape(_contents)
+		_contents = escape(contents.duplicate())
 	if _contents.is_empty():
 		# Our packet is just the header by itself
 		return header + "#%"
