@@ -5,13 +5,13 @@ class_name ICMessage
 const HEADER = "MS"
 
 # Local variables of each IC Message property
-var desk_mod: int = 0
+var desk_mod: String = "1"
 var pre_emote: String = ""
 var char_name: String = ""
 var emote: String = ""
 var message: String = ""
 var side: String = "wit"
-var sfx_name: String = ""
+var sfx_name: String = "0"
 var emote_mod: int = 0
 var char_id: int = -1
 var sfx_delay: int = 0
@@ -30,9 +30,9 @@ var other_flip: int = 0
 var immediate: int = 0
 var looping_sfx: int = 0
 var screenshake: int = 0
-var frame_screenshake: String = ""
-var frame_realization: String = ""
-var frame_sfx: String = ""
+var frame_screenshake: String = "-"
+var frame_realization: String = "-"
+var frame_sfx: String = "-"
 var additive: int = 0
 var effect: String = "||"
 var third_charid: int = -1
@@ -154,7 +154,7 @@ func get_inbound_packet() -> AOPacket:
 	var contents: PackedStringArray
 	# Get all the correct values
 	for key in CHAT_MESSAGE_INBOUND:
-		contents.append(self.get(key))
+		contents.append(str(self.get(key)))
 	return AOPacket.new(HEADER, contents)
 
 ## Turns the IC Message into an Outbound Packet (sent by us)
@@ -162,5 +162,5 @@ func get_outbound_packet() -> AOPacket:
 	var contents: PackedStringArray
 	# Get all the correct values
 	for key in CHAT_MESSAGE_OUTBOUND:
-		contents.append(self.get(key))
+		contents.append(str(self.get(key)))
 	return AOPacket.new(HEADER, contents)
