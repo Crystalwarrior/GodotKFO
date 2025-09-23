@@ -19,5 +19,4 @@ visible = false
 [node name="Lobby" parent="." instance=ExtResource("1_glv2v")]
 unique_name_in_owner = true
 
-[connection signal="ooc_message" from="AOProtocol" to="." method="_on_ao_protocol_ooc_message"]
 [connection signal="direct_connect" from="Lobby" to="." method="_on_lobby_direct_connect"]

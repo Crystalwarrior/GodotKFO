@@ -33,6 +33,9 @@ func _init(_header: String = "", _contents: PackedStringArray = []) -> void:
 	header = _header
 	contents = _contents
 
+func _to_string() -> String:
+	return "<" + self.get_script().get_global_name() + ": " + self.get_packet_string() + ">"
+
 func get_packet_string(encoded: bool = false):
 	var _contents: PackedStringArray = contents
 	if encoded:

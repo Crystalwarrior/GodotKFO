@@ -7,6 +7,7 @@ signal data_received(command: String, contents: PackedStringArray)
 
 # Specific command signals
 signal ooc_message(ooc_name: String, message: String, message_type: int)
+signal ic_message(ic_msg: ICMessage)
 
 var client: BaseClient
 
@@ -152,6 +153,9 @@ func receive_server_packet(packet: AOPacket):
 	if header == "CHECK":
 		var latency = pong()
 		print("Ping-Pong: ", latency)
+	if header == "MS":
+		var new_ic_message = ICMessage.new_inbound(packet.contents)
+		ic_message.emit(new_ic_message)
 
 func send_server_packet(packet: AOPacket):
 	# never send an unencoded packet!
