@@ -43,6 +43,7 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
+scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 
@@ -76,6 +77,7 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
+scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 
