@@ -24,8 +24,8 @@ func _on_ao_protocol_disconnected() -> void:
 	lobby.set_visible(true)
 	chat.set_visible(false)
 
-func _on_lobby_direct_connect(address: String) -> void:
-	ao_protocol.join(address)
+func _on_lobby_direct_connect(address: String, use_ws: bool) -> void:
+	ao_protocol.join(address, use_ws)
 
 func _on_ao_protocol_ooc_message(ooc_name: String, message: String, message_type: int) -> void:
 	chat.ooc_tab.add_message(ooc_name, message, message_type)
