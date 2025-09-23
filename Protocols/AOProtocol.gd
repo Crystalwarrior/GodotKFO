@@ -26,12 +26,6 @@ var keep_alive_timer_wait_time: float = 45.0
 var ping_check_start: int = 0
 
 func _ready() -> void:
-	client = TCPClient.new()
-	client.connected.connect(_handle_client_connected)
-	client.disconnected.connect(_handle_client_disconnected)
-	client.data_received.connect(_handle_client_data)
-	add_child(client)
-
 	keep_alive_timer = Timer.new()
 	# Tell the server we're alive every X seconds
 	keep_alive_timer.wait_time = keep_alive_timer_wait_time
@@ -40,7 +34,15 @@ func _ready() -> void:
 	keep_alive_timer.timeout.connect(_on_keep_alive_timer_timeout)
 	add_child(keep_alive_timer)
 
-func join(address: String):
+func join(address: String, use_ws: bool = false):
+	if use_ws:
+		client = WSClient.new()
+	else:
+		client = TCPClient.new()
+	client.connected.connect(_handle_client_connected)
+	client.disconnected.connect(_handle_client_disconnected)
+	client.data_received.connect(_handle_client_data)
+	add_child(client)
 	if client is WSClient:
 		client.connect_to_url(address)
 	elif client is TCPClient:
@@ -74,6 +76,8 @@ func _handle_client_data(data: PackedByteArray) -> void:
 func _handle_client_disconnected() -> void:
 	print("Client disconnected from server.")
 	disconnected.emit()
+	client.queue_free()
+	client = null
 
 func handle_server_packet(incoming_data: String):
 	# full packets always end in %
