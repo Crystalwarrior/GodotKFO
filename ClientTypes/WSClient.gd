@@ -6,9 +6,8 @@ var websocket_stream: WebSocketPeer = WebSocketPeer.new()
 
 func connect_to_url(url: String) -> void:
 	print("Connecting to %s" % url)
-	status = websocket_stream.STATE_CLOSED
-	#var _error = websocket_stream.connect_to_url("wss://%s:%s" % [host, str(port)])
-	var _error = websocket_stream.connect_to_url("wss://%s" % url)
+	#var _error = websocket_stream.connect_to_url("ws://%s:%s" % [host, str(port)])
+	var _error = websocket_stream.connect_to_url("ws://%s" % url)
 	if _error != OK:
 		printerr("Error connecting to host!")
 
