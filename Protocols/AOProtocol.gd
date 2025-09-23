@@ -62,7 +62,7 @@ func join(address: String):
 
 func _handle_client_connected() -> void:
 	print("Client connected to server.")
-	client.name = "Client %s" % client.tcp_stream.get_local_port()
+	client.name = "Client"
 	connected.emit()
 	# Begin ensuring the client remains ALIVE
 	keep_alive_timer.start()
