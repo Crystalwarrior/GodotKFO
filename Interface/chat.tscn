@@ -13,25 +13,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_576eh")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterDropdown" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+tooltip_text = "Change Your Character"
+text_overrun_behavior = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ICTab" type="PanelContainer" parent="HSplitContainer"]
+[node name="ICTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_dg5i7")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/ICTab"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/ICTab"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/ICTab/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/ICTab/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -39,7 +52,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ICLogs" type="RichTextLabel" parent="HSplitContainer/ICTab/VBoxContainer/MarginContainer"]
+[node name="ICLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/ICTab/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
@@ -47,7 +60,7 @@ scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="ICMessageInput" type="TextEdit" parent="HSplitContainer/ICTab/VBoxContainer"]
+[node name="ICMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/ICTab/VBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2
@@ -56,16 +69,16 @@ wrap_mode = 1
 scroll_fit_content_height = true
 caret_blink = true
 
-[node name="OOCTab" type="PanelContainer" parent="HSplitContainer"]
+[node name="OOCTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_jmgow")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/OOCTab"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/OOCTab"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/OOCTab/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -73,7 +86,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="OOCLogs" type="RichTextLabel" parent="HSplitContainer/OOCTab/VBoxContainer/MarginContainer"]
+[node name="OOCLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
@@ -81,20 +94,20 @@ scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/OOCTab/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer"]
 layout_mode = 2
 
-[node name="OOCNameInput" type="LineEdit" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 placeholder_text = "OOC Name"
 clear_button_enabled = true
 
-[node name="VSeparator" type="VSeparator" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="OOCMessageInput" type="TextEdit" parent="HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
+[node name="OOCMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/OOCTab/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 2

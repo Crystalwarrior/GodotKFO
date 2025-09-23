@@ -8,6 +8,8 @@ signal data_received(command: String, contents: PackedStringArray)
 # Specific command signals
 signal ooc_message(ooc_name: String, message: String, message_type: int)
 signal ic_message(ic_msg: ICMessage)
+signal character_list(characters: PackedStringArray)
+signal changed_character(client_id: int, character_id: int)
 
 var client: BaseClient
 
@@ -124,15 +126,14 @@ func receive_server_packet(packet: AOPacket):
 		var _evidence_list_size = contents[1]
 		var _music_list_size = contents[2]
 		# Asks for the whole character list (AO2)
-		#send_server_packet(AOPacket.new("RC"))
+		send_server_packet(AOPacket.new("RC"))
 		# Asks for the whole music list (AO2)
 		#send_server_packet(AOPacket.new("RM"))
 		# Asks for server metadata(charscheck, motd etc.) and a DONE#% signal(also best packet)
 		send_server_packet(AOPacket.new("RD"))
 	# "Send Characters"
 	if header == "SC":
-		var _character_list: PackedStringArray = []
-		_character_list = contents
+		character_list.emit(contents)
 	# "Send Music"
 	if header == "SM":
 		var _music_list: PackedStringArray = []
@@ -149,6 +150,15 @@ func receive_server_packet(packet: AOPacket):
 		if contents.size() >= 3:
 			message_type = int(contents[2])
 		ooc_message.emit(ooc_name, message, message_type)
+	if header == "PV":
+		if contents.size() < 3:
+			return
+		var new_client_id: int = int(contents[0])
+		# This one is always "CID"...
+		var _type: String = contents[1]
+		var new_character_id: int = int(contents[2])
+		# Set the globals of client ID and character ID
+		changed_character.emit(new_client_id, new_character_id)
 	# The "Pong" to our "Ping" ("CH" packet we sent to the server earlier)
 	if header == "CHECK":
 		var latency = pong()
@@ -164,8 +174,16 @@ func send_server_packet(packet: AOPacket):
 	var packet_string = packet.get_packet_string()
 	client.send_string(packet_string)
 
+func send_ic_message(new_ic_message: ICMessage):
+	var packet: AOPacket = new_ic_message.get_outbound_packet()
+	send_server_packet(packet)
+
 func send_ooc_message(ooc_name: String, message: String):
 	send_server_packet(AOPacket.new("CT", [ooc_name, message]))
+
+func select_character(char_id: int):
+	# client id, character index, hdid again for some reason
+	send_server_packet(AOPacket.new("CC", [-1, char_id, -1]))
 
 ## Remind the server we're alive. ping_server() equivalent
 func _on_keep_alive_timer_timeout() -> void:

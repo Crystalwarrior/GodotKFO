@@ -22,8 +22,11 @@ func add_message(ic_message: ICMessage) -> void:
 
 func construct_ic_message() -> ICMessage:
 	var ic_message: ICMessage = ICMessage.new()
-	ic_message.message = ic_message.message
-	ic_message.showname = ic_message.showname
+	ic_message.char_id = Globals.character_id
+	if ic_message.char_id >= 0 and ic_message.char_id < Globals.character_list.size():
+		ic_message.char_name = Globals.character_list[Globals.character_id]
+	ic_message.message = ic_message_input.text
+	ic_message.showname = ""
 	return ic_message
 
 #region SIGNALS

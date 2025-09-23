@@ -16,9 +16,14 @@ run/main_scene="uid://dlcbumu066hdh"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Globals="*res://Autoloads/Globals.gd"
+
 [file_customization]
 
 folder_colors={
+"res://Autoloads/": "teal",
 "res://ClientTypes/": "blue",
 "res://Interface/": "green",
 "res://Protocols/": "purple",
