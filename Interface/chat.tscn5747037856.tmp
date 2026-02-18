@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://c4hmbhx5i0bfy"]
+
+[ext_resource type="Script" uid="uid://cekweyuuvlrpf" path="res://Interface/chat.gd" id="1_576eh"]
+[ext_resource type="Script" uid="uid://bpk5j7h3uw850" path="res://Interface/ic_tab.gd" id="1_dg5i7"]
+[ext_resource type="Script" uid="uid://ct1dt0o3cuuak" path="res://Interface/dock.gd" id="3_1wgwr"]
+[ext_resource type="Script" uid="uid://cal7pradmsk6r" path="res://Interface/ooc_tab.gd" id="3_jmgow"]
+
+[node name="Chat" type="Control" unique_id=2046201461]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_576eh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2039947363]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuBar" type="HBoxContainer" parent="VBoxContainer" unique_id=384881001]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MenuBar" unique_id=1580252961]
+layout_mode = 2
+text = "menu bar funny moments"
+
+[node name="CharacterDropdown" type="OptionButton" parent="VBoxContainer/MenuBar" unique_id=308690936]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+tooltip_text = "Change Your Character"
+text_overrun_behavior = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer" unique_id=1507419738]
+layout_mode = 2
+size_flags_vertical = 3
+split_offsets = PackedInt32Array(0, 0)
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HSplitContainer" unique_id=337076084]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer" unique_id=1466692816]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("3_1wgwr")
+
+[node name="ICTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer" unique_id=1935144483]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_dg5i7")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer/ICTab" unique_id=1480697994]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer/ICTab/VBoxContainer" unique_id=1339723140]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ICLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer/ICTab/VBoxContainer/MarginContainer" unique_id=605096645]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="ICMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer/ICTab/VBoxContainer" unique_id=1497547202]
+layout_mode = 2
+placeholder_text = "Message in-character"
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="TabContainer2" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer" unique_id=1106313637]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("3_1wgwr")
+
+[node name="Music" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer2" unique_id=1464687189]
+layout_mode = 2
+text = "Funny Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_tab_index = 0
+
+[node name="Areas" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer2" unique_id=1498604218]
+visible = false
+layout_mode = 2
+text = "Funny Areas"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_tab_index = 1
+
+[node name="SFX" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/TabContainer2" unique_id=1907497308]
+visible = false
+layout_mode = 2
+text = "Funny Sfx"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_tab_index = 2
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="VBoxContainer/HSplitContainer" unique_id=1994697719]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer2" unique_id=102558431]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+script = ExtResource("3_1wgwr")
+
+[node name="Viewport" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer2/TabContainer" unique_id=1071051101]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HSplitContainer/VSplitContainer2/TabContainer/Viewport" unique_id=1673156823]
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="ICMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer2/TabContainer/Viewport" unique_id=63662415]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Message in-character"
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="TabContainer2" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer2" unique_id=1789647850]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+tabs_position = 1
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("3_1wgwr")
+
+[node name="Chat" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer2/TabContainer2" unique_id=1131186510]
+layout_mode = 2
+text = "Funny Character Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_tab_index = 0
+
+[node name="VSplitContainer3" type="VSplitContainer" parent="VBoxContainer/HSplitContainer" unique_id=393570892]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3" unique_id=1447340396]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("3_1wgwr")
+
+[node name="OOCTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer" unique_id=1990694506]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_jmgow")
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab" unique_id=152673190]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer" unique_id=1988634219]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OOCLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer/MarginContainer" unique_id=234004629]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer" unique_id=348645530]
+layout_mode = 2
+
+[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer/HBoxContainer" unique_id=1490899017]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+placeholder_text = "OOC Name"
+clear_button_enabled = true
+caret_blink = true
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer/HBoxContainer" unique_id=1644252531]
+layout_mode = 2
+
+[node name="OOCMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer/OOCTab/VBoxContainer/HBoxContainer" unique_id=1712818265]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Message out-of-character"
+wrap_mode = 1
+tab_input_mode = false
+scroll_fit_content_height = true
+caret_blink = true
+
+[node name="TabContainer2" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3" unique_id=1356441015]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+tabs_rearrange_group = 0
+script = ExtResource("3_1wgwr")
+
+[node name="Settings" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer3/TabContainer2" unique_id=1956924597]
+layout_mode = 2
+text = "Idk I guess settings here??"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_tab_index = 0
