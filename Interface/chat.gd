@@ -4,6 +4,8 @@ extends Control
 @onready var ooc_tab: Control = %OOCTab
 @onready var character_dropdown: OptionButton = %CharacterDropdown
 @onready var dock_popup: Popup = %DockPopup
+@onready var music_list: Tree = %MusicList
+@onready var song_name_label: Label = %SongNameLabel
 
 signal ic_outbound(showname: String, message: String)
 signal ooc_outbound(ooc_name: String, message: String)
@@ -31,6 +33,27 @@ func populate_character_dropdown(character_list: PackedStringArray):
 	character_dropdown.add_item("SPECTATOR")
 	for character in character_list:
 		character_dropdown.add_item(character)
+
+func populate_music_list(song_list: Dictionary[StringName, Array]):
+	music_list.clear()
+	var root = music_list.create_item()
+	music_list.hide_root = true
+	for category in song_list.keys():
+		var category_item = root
+		if category != "":
+			category_item = music_list.create_item(root)
+			category_item.set_text(0, category)
+			category_item.set_metadata(0, category)
+		for song in song_list[category]:
+			# First, cut off the file extension
+			var song_basename = song.get_basename()
+			# Second, cut off the folder path and just get the name
+			song_basename = song_basename.substr(song_basename.rfind("/")+1)
+
+			var song_item = music_list.create_item(category_item)
+			song_item.set_text(0, song_basename)
+			song_item.set_metadata(0, song)
+			song_item.set_tooltip_text(0, song)
 
 func _on_dock_popup_position_pressed(position_name: StringName):
 	var move_control: Control = dock_popup.current_dock.get_current_tab_control()

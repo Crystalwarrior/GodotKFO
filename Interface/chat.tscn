@@ -5,7 +5,10 @@
 [ext_resource type="Script" uid="uid://vykxic65w0wd" path="res://Interface/split_column.gd" id="2_bjwva"]
 [ext_resource type="Script" uid="uid://ct1dt0o3cuuak" path="res://Interface/dock.gd" id="3_1wgwr"]
 [ext_resource type="Script" uid="uid://cal7pradmsk6r" path="res://Interface/ooc_tab.gd" id="3_jmgow"]
+[ext_resource type="Texture2D" uid="uid://dko20ib3j3yxc" path="res://Assets/Icons/Play.svg" id="5_1r6al"]
+[ext_resource type="Texture2D" uid="uid://djg3hldss2luo" path="res://Assets/Icons/Streamed.svg" id="5_4frnn"]
 [ext_resource type="Script" uid="uid://dwq6vjobjbfxv" path="res://Interface/dock_popup.gd" id="5_njeoq"]
+[ext_resource type="Texture2D" uid="uid://c0m535dichqjb" path="res://Assets/Icons/GuiTabMenuHl.svg" id="6_4frnn"]
 
 [node name="Chat" type="Control" unique_id=2046201461]
 layout_mode = 3
@@ -15,6 +18,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_576eh")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1858920]
+unique_name_in_owner = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2039947363]
 layout_mode = 1
@@ -101,12 +107,57 @@ drag_to_rearrange_enabled = true
 tabs_rearrange_group = 0
 script = ExtResource("3_1wgwr")
 
-[node name="Music" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b" unique_id=1464687189]
+[node name="Music" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b" unique_id=1037314166]
 layout_mode = 2
-text = "Funny Music"
-horizontal_alignment = 1
-vertical_alignment = 1
 metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music" unique_id=419032224]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer" unique_id=1403840109]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer" unique_id=2117328599]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2018126037]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="SongNameLabel" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1449814140]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Song Name Here"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=888624889]
+layout_mode = 2
+
+[node name="SyncButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=51481827]
+layout_mode = 2
+icon = ExtResource("5_4frnn")
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=87249853]
+layout_mode = 2
+icon = ExtResource("5_1r6al")
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1707377703]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1124866846]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+icon = ExtResource("6_4frnn")
+expand_icon = true
+
+[node name="MusicList" type="Tree" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer" unique_id=1591480739]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Areas" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b" unique_id=1498604218]
 visible = false

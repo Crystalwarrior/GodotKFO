@@ -9,7 +9,13 @@ signal data_received(command: String, contents: PackedStringArray)
 signal ooc_message(ooc_name: String, message: String, message_type: int)
 signal ic_message(ic_msg: ICMessage)
 signal character_list(characters: PackedStringArray)
+signal music_list(songs: PackedStringArray)
 signal changed_character(client_id: int, character_id: int)
+
+signal music_change(
+	song: String, by_char_id: int, showname: String,
+	looping: bool, channel: int, effect_flags: int
+)
 
 var client: BaseClient
 
@@ -111,7 +117,26 @@ func receive_server_packet(packet: AOPacket):
 	# Specific parsing for AO Protocol stuff
 	# Music Change"
 	if header == "MC":
-		print("MUSIC CHANGE %s" % contents)
+		if contents.size() < 2:
+			return
+		var song: String = contents[0]
+		var by_char_id: int = int(contents[1])
+		var showname: String = contents[2]
+
+		# No loop due to outdated servers using serverside looping
+		var looping: bool = false
+		# Channel 0 is 'master music', other for ambient
+		var channel: int = 0
+		# No effects by default - vanilla functionality
+		var effect_flags: int = 0
+		if contents.size() > 3:
+			looping = bool(int(contents[3]))
+		if contents.size() > 4:
+			channel = int(contents[4])
+		if contents.size() > 5:
+			# TODO: use an enum for this
+			effect_flags = int(contents[5])
+		music_change.emit(song, by_char_id, showname, looping, channel, effect_flags)
 	if header == "decryptor":
 		send_server_packet(AOPacket.new("HI", [OS.get_unique_id()]))
 	# "Identification"
@@ -131,17 +156,18 @@ func receive_server_packet(packet: AOPacket):
 		var _music_list_size = contents[2]
 		# Asks for the whole character list (AO2)
 		send_server_packet(AOPacket.new("RC"))
-		# Asks for the whole music list (AO2)
-		#send_server_packet(AOPacket.new("RM"))
-		# Asks for server metadata(charscheck, motd etc.) and a DONE#% signal(also best packet)
-		send_server_packet(AOPacket.new("RD"))
 	# "Send Characters"
 	if header == "SC":
 		character_list.emit(contents)
+		# Asks for the whole music list (AO2)
+		send_server_packet(AOPacket.new("RM"))
 	# "Send Music"
 	if header == "SM":
 		var _music_list: PackedStringArray = []
 		_music_list = contents
+		music_list.emit(_music_list)
+		# Asks for server metadata(charscheck, motd etc.) and a DONE#% signal(also best packet)
+		send_server_packet(AOPacket.new("RD"))
 	if header == "DONE":
 		print("This is where we would destroy the lobby as we are finished")
 	# "Chat" ?
