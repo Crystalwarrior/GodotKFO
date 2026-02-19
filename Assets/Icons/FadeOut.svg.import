@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cud6riiipqr3r"
-path="res://.godot/imported/Streamed.svg-fffb51068c6bdf2d94354ebe465316a9.ctex"
+uid="uid://bxdov20w001e1"
+path="res://.godot/imported/FadeOut.svg-abb0e8dd21ebf37fd1e10a209daebaea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Streamed.svg"
-dest_files=["res://.godot/imported/Streamed.svg-fffb51068c6bdf2d94354ebe465316a9.ctex"]
+source_file="res://Assets/Icons/FadeOut.svg"
+dest_files=["res://.godot/imported/FadeOut.svg-abb0e8dd21ebf37fd1e10a209daebaea.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 extends Control
 
-@onready var ic_tab: Control = %ICTab
-@onready var ooc_tab: Control = %OOCTab
+@onready var ic_tab: Control = %"In Character"
+@onready var ooc_tab: Control = %"Out Of Character"
 @onready var character_dropdown: OptionButton = %CharacterDropdown
 @onready var dock_popup: Popup = %DockPopup
 @onready var music_list: Tree = %MusicList

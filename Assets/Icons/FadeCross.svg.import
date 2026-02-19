@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cud6riiipqr3r"
-path="res://.godot/imported/Streamed.svg-fffb51068c6bdf2d94354ebe465316a9.ctex"
+uid="uid://djku7lpsj38ul"
+path="res://.godot/imported/FadeCross.svg-a2a975f1285af22f1d4b23a5cacd73a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Streamed.svg"
-dest_files=["res://.godot/imported/Streamed.svg-fffb51068c6bdf2d94354ebe465316a9.ctex"]
+source_file="res://Assets/Icons/FadeCross.svg"
+dest_files=["res://.godot/imported/FadeCross.svg-a2a975f1285af22f1d4b23a5cacd73a0.ctex"]
 
 [params]
 

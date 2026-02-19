@@ -6,9 +6,29 @@
 [ext_resource type="Script" uid="uid://ct1dt0o3cuuak" path="res://Interface/dock.gd" id="3_1wgwr"]
 [ext_resource type="Script" uid="uid://cal7pradmsk6r" path="res://Interface/ooc_tab.gd" id="3_jmgow"]
 [ext_resource type="Texture2D" uid="uid://dko20ib3j3yxc" path="res://Assets/Icons/Play.svg" id="5_1r6al"]
-[ext_resource type="Texture2D" uid="uid://djg3hldss2luo" path="res://Assets/Icons/Streamed.svg" id="5_4frnn"]
+[ext_resource type="Texture2D" uid="uid://cud6riiipqr3r" path="res://Assets/Icons/Streamed.svg" id="5_4frnn"]
 [ext_resource type="Script" uid="uid://dwq6vjobjbfxv" path="res://Interface/dock_popup.gd" id="5_njeoq"]
+[ext_resource type="Script" uid="uid://dt407mo05dcmc" path="res://Interface/docks/music/music.gd" id="5_v6o80"]
 [ext_resource type="Texture2D" uid="uid://c0m535dichqjb" path="res://Assets/Icons/GuiTabMenuHl.svg" id="6_4frnn"]
+[ext_resource type="Texture2D" uid="uid://0k8drtxbbcfd" path="res://Assets/Icons/Loop.svg" id="7_v6emd"]
+[ext_resource type="Texture2D" uid="uid://bpw2sqgpmtecl" path="res://Assets/Icons/FadeIn.svg" id="8_ycfpo"]
+[ext_resource type="Texture2D" uid="uid://bxdov20w001e1" path="res://Assets/Icons/FadeOut.svg" id="9_abpd6"]
+[ext_resource type="Texture2D" uid="uid://dqqf3k14e3u1l" path="res://Assets/Icons/Stop.svg" id="11_onh8f"]
+[ext_resource type="Texture2D" uid="uid://c87uejawqcl7g" path="res://Assets/Icons/RandomNumberGenerator.svg" id="12_c8wly"]
+[ext_resource type="Texture2D" uid="uid://b0pxggrf02rl2" path="res://Assets/Icons/ExpandTree.svg" id="13_c8wly"]
+[ext_resource type="Texture2D" uid="uid://dr44wcx12olkk" path="res://Assets/Icons/CollapseTree.svg" id="14_v6o80"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4frnn"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.27022207, 0.27022186, 0.2702219, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="Chat" type="Control" unique_id=2046201461]
 layout_mode = 3
@@ -64,7 +84,7 @@ drag_to_rearrange_enabled = true
 tabs_rearrange_group = 0
 script = ExtResource("3_1wgwr")
 
-[node name="ICTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a" unique_id=1935144483]
+[node name="In Character" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a" unique_id=1935144483]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -72,10 +92,10 @@ size_flags_vertical = 3
 script = ExtResource("1_dg5i7")
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/ICTab" unique_id=1480697994]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/In Character" unique_id=1480697994]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/ICTab/VBoxContainer" unique_id=1339723140]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/In Character/VBoxContainer" unique_id=1339723140]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -83,21 +103,13 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="ICLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/ICTab/VBoxContainer/MarginContainer" unique_id=605096645]
+[node name="ICLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/In Character/VBoxContainer/MarginContainer" unique_id=605096645]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
 scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
-
-[node name="ICMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_a/ICTab/VBoxContainer" unique_id=1497547202]
-layout_mode = 2
-placeholder_text = "Message in-character"
-wrap_mode = 1
-tab_input_mode = false
-scroll_fit_content_height = true
-caret_blink = true
 
 [node name="dock_b" type="TabContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer" unique_id=1106313637]
 unique_name_in_owner = true
@@ -109,6 +121,7 @@ script = ExtResource("3_1wgwr")
 
 [node name="Music" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b" unique_id=1037314166]
 layout_mode = 2
+script = ExtResource("5_v6o80")
 metadata/_tab_index = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music" unique_id=419032224]
@@ -122,37 +135,122 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=2018126037]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=449010405]
 layout_mode = 2
+
+[node name="PreviewButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=51481827]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Toggles between Online and Preview modes when pressed.
+Ear icon means Preview, wifi icon means Online."
+icon = ExtResource("5_4frnn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2018126037]
+layout_mode = 2
+size_flags_horizontal = 3
 vertical_scroll_mode = 0
 
-[node name="SongNameLabel" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=1449814140]
+[node name="SongNameLabel" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/ScrollContainer" unique_id=1449814140]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Song Name Here"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=888624889]
-layout_mode = 2
-
-[node name="SyncButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=51481827]
-layout_mode = 2
-icon = ExtResource("5_4frnn")
-
-[node name="PlayButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=87249853]
-layout_mode = 2
-icon = ExtResource("5_1r6al")
-
-[node name="HSlider" type="HSlider" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1707377703]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-
-[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1124866846]
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1124866846]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 icon = ExtResource("6_4frnn")
 expand_icon = true
+item_count = 3
+popup/item_0/text = "Loop"
+popup/item_0/icon = ExtResource("7_v6emd")
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Fade In This"
+popup/item_1/icon = ExtResource("8_ycfpo")
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Fade Out Previous"
+popup/item_2/icon = ExtResource("9_abpd6")
+popup/item_2/checkable = 1
+popup/item_2/id = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=888624889]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1823252272]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_4frnn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer" unique_id=1827431962]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MusicScrubber" type="HSlider" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1707377703]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1501779260]
+layout_mode = 2
+
+[node name="TimeElapsed" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=197391300]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0:00"
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=87249853]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("5_1r6al")
+
+[node name="StopButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1587936132]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 0
+icon = ExtResource("11_onh8f")
+
+[node name="TimeTotal" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1883087227]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "2:34"
+horizontal_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer" unique_id=1714779657]
+layout_mode = 2
+
+[node name="RandomPlay" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/HBoxContainer" unique_id=1729399036]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Play a random song from the current playlist"
+icon = ExtResource("12_c8wly")
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/HBoxContainer" unique_id=342542440]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="ExpandButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/HBoxContainer" unique_id=4112794]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Expand All"
+icon = ExtResource("13_c8wly")
+
+[node name="CollapseButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/HBoxContainer" unique_id=368143815]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Collapse All"
+icon = ExtResource("14_v6o80")
 
 [node name="MusicList" type="Tree" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer" unique_id=1591480739]
 unique_name_in_owner = true
@@ -254,7 +352,7 @@ drag_to_rearrange_enabled = true
 tabs_rearrange_group = 0
 script = ExtResource("3_1wgwr")
 
-[node name="OOCTab" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f" unique_id=1990694506]
+[node name="Out Of Character" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f" unique_id=1990694506]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -262,10 +360,10 @@ size_flags_vertical = 3
 script = ExtResource("3_jmgow")
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab" unique_id=152673190]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character" unique_id=152673190]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer" unique_id=1988634219]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer" unique_id=1988634219]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 8
@@ -273,7 +371,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="OOCLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer/MarginContainer" unique_id=234004629]
+[node name="OOCLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/MarginContainer" unique_id=234004629]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
@@ -281,10 +379,10 @@ scroll_following = true
 context_menu_enabled = true
 selection_enabled = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer" unique_id=348645530]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer" unique_id=8807831]
 layout_mode = 2
 
-[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer/HBoxContainer" unique_id=1490899017]
+[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1490899017]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
@@ -292,14 +390,10 @@ placeholder_text = "OOC Name"
 clear_button_enabled = true
 caret_blink = true
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer/HBoxContainer" unique_id=1644252531]
-layout_mode = 2
-
-[node name="OOCMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/OOCTab/VBoxContainer/HBoxContainer" unique_id=1712818265]
+[node name="OOCMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1712818265]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Message out-of-character"
+placeholder_text = "Message OOC"
 wrap_mode = 1
 tab_input_mode = false
 scroll_fit_content_height = true
