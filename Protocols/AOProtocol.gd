@@ -74,6 +74,9 @@ func _handle_client_connected() -> void:
 	connected.emit()
 	# Begin ensuring the client remains ALIVE
 	keep_alive_timer.start()
+	
+	# We are only "actually" connected to the server with this packet
+	send_server_packet(AOPacket.new("askchaa"))
 
 func _handle_client_data(data: PackedByteArray) -> void:
 	var incoming_data: String = data.get_string_from_utf8()
@@ -109,7 +112,7 @@ func receive_server_packet(packet: AOPacket):
 	packet.net_decode()
 	var header: String = packet.header
 	var contents: PackedStringArray = packet.contents
-	print("Received Header: %s, Contents: %s" % [header, contents])
+	print("Received Header: %s, Contents: %s" % [header, "..."])
 
 	# General data received
 	data_received.emit(header, contents)
@@ -142,8 +145,6 @@ func receive_server_packet(packet: AOPacket):
 	# "Identification"
 	if header == "ID":
 		send_server_packet(AOPacket.new("ID", ["AO2", "2.10.1"]))
-		# We are only "actually" connected to the server with this packet
-		send_server_packet(AOPacket.new("askchaa"))
 	# "Feature List"
 	if header == "FL":
 		feature_list = contents
@@ -203,6 +204,7 @@ func send_server_packet(packet: AOPacket):
 	# Send the packet as string
 	var packet_string = packet.get_packet_string()
 	client.send_string(packet_string)
+	print("Responding: %s, Contents: %s" % [packet.header, "..."])
 
 func send_ic_message(new_ic_message: ICMessage):
 	var packet: AOPacket = new_ic_message.get_outbound_packet()
