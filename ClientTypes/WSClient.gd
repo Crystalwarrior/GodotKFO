@@ -6,6 +6,12 @@ var websocket_stream: WebSocketPeer = WebSocketPeer.new()
 
 func connect_to_url(url: String) -> void:
 	print("Connecting to %s" % url)
+	
+	# Increase the buffer size to double the default as servers' music lists
+	# can get absurdly big
+	websocket_stream.inbound_buffer_size = 131070
+	websocket_stream.outbound_buffer_size = 131070
+	
 	#var _error = websocket_stream.connect_to_url("ws://%s:%s" % [host, str(port)])
 	var _error = websocket_stream.connect_to_url("ws://%s" % url)
 	if _error != OK:
