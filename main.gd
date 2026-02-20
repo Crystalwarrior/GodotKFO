@@ -3,7 +3,10 @@ extends Node
 # TODO: don't call this "main", call this "AOClient" instead
 # as it just translates AO commands
 
+# Functionality
 @onready var ao_protocol: AOProtocol = %AOProtocol
+
+# Interface
 @onready var chat: Control = %Chat
 @onready var lobby: Control = %Lobby
 
@@ -19,6 +22,9 @@ func _ready() -> void:
 	chat.ic_outbound.connect(ao_protocol.send_ic_message)
 	chat.ooc_outbound.connect(ao_protocol.send_ooc_message)
 	chat.character_selected.connect(ao_protocol.select_character)
+	chat.music.play.connect(_on_song_requested)
+	chat.music.stop.connect(_on_song_stopped)
+
 
 func _on_ao_protocol_connected() -> void:
 	lobby.set_visible(false)
@@ -89,9 +95,15 @@ func _on_ao_music_list(songs: PackedStringArray) -> void:
 	chat.populate_music_list(music_list)
 
 func _on_ao_music_change(song: String, by_char_id: int, showname: String, looping: bool, channel: int, effect_flags: int) -> void:
-	# First, cut off the file extension
-	var song_basename = song.get_basename()
-	# Second, cut off the folder path and just get the name
-	song_basename = song_basename.substr(song_basename.rfind("/")+1)
-	# update the display name
-	chat.song_name_label.text = song_basename
+	if song == "~stop.mp3":
+		song = ""
+	Globals.current_song = song
+	
+	chat.music.play_song(song, looping, channel, effect_flags)
+
+func _on_song_requested(song: String) -> void:
+	ao_protocol.send_song(song, Globals.character_id)
+
+func _on_song_stopped() -> void:
+	# stupid ao protocol lol
+	ao_protocol.send_song("~stop.mp3", Globals.character_id)

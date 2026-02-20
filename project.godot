@@ -20,6 +20,10 @@ run/main_scene="uid://dlcbumu066hdh"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://coqtmy6cf2xlg"
+
 [autoload]
 
 Globals="*res://Autoloads/Globals.gd"
@@ -32,5 +36,6 @@ folder_colors={
 "res://ClientTypes/": "blue",
 "res://Interface/": "green",
 "res://Protocols/": "purple",
-"res://RefCounted/": "pink"
+"res://RefCounted/": "pink",
+"res://Scripts/": "yellow"
 }

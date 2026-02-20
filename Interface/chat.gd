@@ -6,6 +6,8 @@ extends Control
 @onready var dock_popup: Popup = %DockPopup
 @onready var music_list: Tree = %MusicList
 @onready var song_name_label: Label = %SongNameLabel
+# TODO: rename to "music_dock"
+@onready var music: PanelContainer = %Music
 
 signal ic_outbound(showname: String, message: String)
 signal ooc_outbound(ooc_name: String, message: String)

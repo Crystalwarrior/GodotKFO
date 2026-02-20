@@ -5,14 +5,16 @@
 [ext_resource type="Script" uid="uid://vykxic65w0wd" path="res://Interface/split_column.gd" id="2_bjwva"]
 [ext_resource type="Script" uid="uid://ct1dt0o3cuuak" path="res://Interface/dock.gd" id="3_1wgwr"]
 [ext_resource type="Script" uid="uid://cal7pradmsk6r" path="res://Interface/ooc_tab.gd" id="3_jmgow"]
-[ext_resource type="Texture2D" uid="uid://dko20ib3j3yxc" path="res://Assets/Icons/Play.svg" id="5_1r6al"]
 [ext_resource type="Texture2D" uid="uid://cud6riiipqr3r" path="res://Assets/Icons/Streamed.svg" id="5_4frnn"]
 [ext_resource type="Script" uid="uid://dwq6vjobjbfxv" path="res://Interface/dock_popup.gd" id="5_njeoq"]
-[ext_resource type="Script" uid="uid://dt407mo05dcmc" path="res://Interface/docks/music/music.gd" id="5_v6o80"]
+[ext_resource type="Script" uid="uid://dt407mo05dcmc" path="res://Interface/docks/music/music_dock.gd" id="5_v6o80"]
 [ext_resource type="Texture2D" uid="uid://c0m535dichqjb" path="res://Assets/Icons/GuiTabMenuHl.svg" id="6_4frnn"]
+[ext_resource type="Script" uid="uid://dgpf3r3bri7nn" path="res://Scripts/music_player.gd" id="6_77n3h"]
+[ext_resource type="Script" uid="uid://btfbwkeg6808a" path="res://Scripts/music_manager.gd" id="6_ajram"]
 [ext_resource type="Texture2D" uid="uid://0k8drtxbbcfd" path="res://Assets/Icons/Loop.svg" id="7_v6emd"]
 [ext_resource type="Texture2D" uid="uid://bpw2sqgpmtecl" path="res://Assets/Icons/FadeIn.svg" id="8_ycfpo"]
 [ext_resource type="Texture2D" uid="uid://bxdov20w001e1" path="res://Assets/Icons/FadeOut.svg" id="9_abpd6"]
+[ext_resource type="Texture2D" uid="uid://cvdsvuphea15x" path="res://Assets/Icons/Listen.svg" id="9_ajram"]
 [ext_resource type="Texture2D" uid="uid://dqqf3k14e3u1l" path="res://Assets/Icons/Stop.svg" id="11_onh8f"]
 [ext_resource type="Texture2D" uid="uid://c87uejawqcl7g" path="res://Assets/Icons/RandomNumberGenerator.svg" id="12_c8wly"]
 [ext_resource type="Texture2D" uid="uid://b0pxggrf02rl2" path="res://Assets/Icons/ExpandTree.svg" id="13_c8wly"]
@@ -39,9 +41,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_576eh")
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1858920]
-unique_name_in_owner = true
-
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2039947363]
 layout_mode = 1
 anchors_preset = 15
@@ -53,9 +52,9 @@ grow_vertical = 2
 [node name="MenuBar" type="HBoxContainer" parent="VBoxContainer" unique_id=384881001]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/MenuBar" unique_id=1580252961]
+[node name="Button" type="Button" parent="VBoxContainer/MenuBar" unique_id=1716673035]
 layout_mode = 2
-text = "menu bar funny moments"
+text = "Options"
 
 [node name="CharacterDropdown" type="OptionButton" parent="VBoxContainer/MenuBar" unique_id=308690936]
 unique_name_in_owner = true
@@ -120,9 +119,22 @@ tabs_rearrange_group = 0
 script = ExtResource("3_1wgwr")
 
 [node name="Music" type="PanelContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b" unique_id=1037314166]
+unique_name_in_owner = true
 layout_mode = 2
 script = ExtResource("5_v6o80")
 metadata/_tab_index = 0
+
+[node name="MusicManager" type="Node" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music" unique_id=1100899128]
+unique_name_in_owner = true
+script = ExtResource("6_ajram")
+
+[node name="0" type="AudioStreamPlayer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/MusicManager" unique_id=1331755479]
+bus = &"Music"
+script = ExtResource("6_77n3h")
+
+[node name="1" type="AudioStreamPlayer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/MusicManager" unique_id=715917554]
+bus = &"Music"
+script = ExtResource("6_77n3h")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music" unique_id=419032224]
 layout_mode = 2
@@ -138,17 +150,22 @@ size_flags_horizontal = 3
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer" unique_id=449010405]
 layout_mode = 2
 
-[node name="PreviewButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=51481827]
+[node name="PreviewButton" type="TextureButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1142634023]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_vertical = 0
 tooltip_text = "Toggles between Online and Preview modes when pressed.
 Ear icon means Preview, wifi icon means Online."
-icon = ExtResource("5_4frnn")
+toggle_mode = true
+texture_normal = ExtResource("5_4frnn")
+texture_pressed = ExtResource("9_ajram")
+stretch_mode = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2018126037]
 layout_mode = 2
 size_flags_horizontal = 3
+horizontal_scroll_mode = 4
 vertical_scroll_mode = 0
 
 [node name="SongNameLabel" type="Label" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2/ScrollContainer" unique_id=1449814140]
@@ -194,6 +211,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+scrollable = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1501779260]
 layout_mode = 2
@@ -204,15 +222,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "0:00"
 
-[node name="PlayButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=87249853]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 0
-icon = ExtResource("5_1r6al")
-
 [node name="StopButton" type="Button" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1587936132]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 size_flags_vertical = 0
 icon = ExtResource("11_onh8f")
@@ -382,21 +393,21 @@ selection_enabled = true
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer" unique_id=8807831]
 layout_mode = 2
 
-[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1490899017]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-placeholder_text = "OOC Name"
-clear_button_enabled = true
-caret_blink = true
-
 [node name="OOCMessageInput" type="TextEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1712818265]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 placeholder_text = "Message OOC"
 wrap_mode = 1
 tab_input_mode = false
 scroll_fit_content_height = true
+caret_blink = true
+
+[node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1490899017]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Name"
+clear_button_enabled = true
 caret_blink = true
 
 [node name="DockPopup" type="Popup" parent="." unique_id=169428659]

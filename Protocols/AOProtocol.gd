@@ -217,6 +217,10 @@ func select_character(char_id: int):
 	# client id, character index, hdid again for some reason
 	send_server_packet(AOPacket.new("CC", [-1, char_id, -1]))
 
+# enum MUSIC_EFFECT { FADE_IN = 1, FADE_OUT = 2, SYNC_POS = 4 }
+func send_song(song: String, by_char_id: int, showname: String = "", effect_flags: int = 2):
+	send_server_packet(AOPacket.new("MC", [song, by_char_id, showname, effect_flags]))
+
 ## Remind the server we're alive. ping_server() equivalent
 func _on_keep_alive_timer_timeout() -> void:
 	send_server_packet(AOPacket.new("CH", [-1]))
