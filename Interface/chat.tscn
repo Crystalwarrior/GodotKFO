@@ -406,6 +406,7 @@ caret_blink = true
 [node name="OOCNameInput" type="LineEdit" parent="VBoxContainer/HSplitContainer/VSplitContainer3/dock_f/Out Of Character/VBoxContainer/HSplitContainer" unique_id=1490899017]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 8
 placeholder_text = "Name"
 clear_button_enabled = true
 caret_blink = true
