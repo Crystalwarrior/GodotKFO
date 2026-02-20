@@ -5,6 +5,7 @@ extends Node
 
 # Functionality
 @onready var ao_protocol: AOProtocol = %AOProtocol
+@onready var main_sub_viewport: SubViewport = %MainSubViewport
 
 # Interface
 @onready var chat: Control = %Chat
@@ -24,6 +25,8 @@ func _ready() -> void:
 	chat.character_selected.connect(ao_protocol.select_character)
 	chat.music.play.connect(_on_song_requested)
 	chat.music.stop.connect(_on_song_stopped)
+	
+	chat.viewport_rect.viewport_texture = main_sub_viewport.get_viewport().get_texture()
 
 
 func _on_ao_protocol_connected() -> void:

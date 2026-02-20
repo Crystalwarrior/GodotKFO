@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://85gmkurme0q1" path="res://Interface/lobby.tscn" id="1_glv2v"]
 [ext_resource type="Script" uid="uid://b5plhg87eemtc" path="res://Protocols/AOProtocol.gd" id="1_r0du0"]
 [ext_resource type="PackedScene" uid="uid://c4hmbhx5i0bfy" path="res://Interface/chat.tscn" id="1_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://dtjh01c453b75" path="res://icon.svg" id="6_3dxm6"]
 
 [node name="Main" type="Node" unique_id=2011653605]
 script = ExtResource("1_cm0pq")
@@ -18,5 +19,15 @@ visible = false
 
 [node name="Lobby" parent="." unique_id=1964407532 instance=ExtResource("1_glv2v")]
 unique_name_in_owner = true
+
+[node name="MainSubViewport" type="SubViewport" parent="." unique_id=40174587]
+unique_name_in_owner = true
+size = Vector2i(256, 192)
+
+[node name="Node2D" type="Node2D" parent="MainSubViewport" unique_id=1455396347]
+
+[node name="Icon" type="Sprite2D" parent="MainSubViewport/Node2D" unique_id=769544095]
+position = Vector2(128, 96)
+texture = ExtResource("6_3dxm6")
 
 [connection signal="direct_connect" from="Lobby" to="." method="_on_lobby_direct_connect"]
