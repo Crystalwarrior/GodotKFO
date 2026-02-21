@@ -12,6 +12,7 @@ extends ColorRect
 func _ready():
 	if viewport_texture != null:
 		set_viewport_texture(viewport_texture)
+	resized.connect(_on_resized)
 
 func set_viewport_texture(p_viewport_texture: ViewportTexture) -> void:
 	viewport_texture_rect.set_texture(p_viewport_texture)
@@ -19,3 +20,6 @@ func set_viewport_texture(p_viewport_texture: ViewportTexture) -> void:
 func get_screenshot() -> Texture:
 	# Get a snapshot of it
 	return ImageTexture.create_from_image(viewport_texture_rect.get_texture().get_image())
+
+func _on_resized() -> void:
+	custom_minimum_size.x = floor(float(viewport_texture_rect.size.x) / (4.0/3.0))

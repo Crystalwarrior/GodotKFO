@@ -175,7 +175,8 @@ layout_mode = 2
 size_flags_horizontal = 6
 text = "Song Name Here"
 
-[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1124866846]
+[node name="SongMenuButton" type="MenuButton" parent="VBoxContainer/HSplitContainer/VSplitContainer/dock_b/Music/VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1124866846]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 icon = ExtResource("6_4frnn")

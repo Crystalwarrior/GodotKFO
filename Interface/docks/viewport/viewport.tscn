@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://dvbh8pm6vxigf"]
 
 [ext_resource type="Script" uid="uid://dcj4bcxanemf2" path="res://Interface/docks/viewport/viewport.gd" id="1_e1eed"]
+[ext_resource type="Shader" uid="uid://bgxd0ad6slj28" path="res://Assets/Shaders/supersampling.gdshader" id="2_scsny"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ovk"]
+shader = ExtResource("2_scsny")
 
 [node name="ViewportRect" type="ColorRect" unique_id=724249114]
+custom_minimum_size = Vector2(0, 192)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -11,23 +16,25 @@ grow_vertical = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_e1eed")
+aspect_ratio = null
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1365430751]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 192)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-ratio = 1.3333
+ratio = 1.7778
+stretch_mode = 1
 
 [node name="Control" type="Control" parent="AspectRatioContainer" unique_id=739050943]
 layout_mode = 2
 
 [node name="ViewportTextureRect" type="TextureRect" parent="AspectRatioContainer/Control" unique_id=494740922]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_g0ovk")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
