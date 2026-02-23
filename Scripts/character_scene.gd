@@ -19,6 +19,11 @@ var talk_prefix = ""
 # The number of animations we're waiting on to finish
 var waiting_on_animations: int = 0
 
+# Display variables
+var character_height: float = 1.0
+
+var position_offset_normal: Vector2 = Vector2(0.0, 0.0)
+
 signal animation_finished
 
 func _init(char_res: CharacterResource = null) -> void:

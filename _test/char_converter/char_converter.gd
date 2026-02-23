@@ -3,7 +3,13 @@ extends Control
 @onready var file_dialog: FileDialog = %FileDialog
 @onready var convert_button: Button = %ConvertButton
 @onready var emote_list: ItemList = %EmoteList
+@onready var aspect_ratio_container: AspectRatioContainer = $HBoxContainer/AspectRatioContainer
+@onready var preview_node: Node2D = $"HBoxContainer/AspectRatioContainer/Preview Node"
 @onready var preview_texture_rect: TextureRect = %PreviewTextureRect
+
+@export var preview_height: float = 1.0
+
+var position_offset_normal: Vector2 = Vector2(0.0, 0.0)
 
 const VALID_SECTIONS: PackedStringArray = [
 	# General character options
@@ -94,3 +100,4 @@ func _on_emote_selected(idx: int):
 	var image_texture: ImageTexture = ImageTexture.new()
 	image_texture.set_image(image)
 	preview_texture_rect.texture = image_texture
+	preview_node.calc_preview_height()
