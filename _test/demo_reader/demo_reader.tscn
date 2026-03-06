@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://cpxiqcmwr6juy"]
+
+[ext_resource type="Texture2D" uid="uid://cgt3ca5p83or8" path="res://Assets/Icons/PlayBackwards.svg" id="1_a0ses"]
+[ext_resource type="Texture2D" uid="uid://dqdrpchg1awxu" path="res://Assets/Icons/PlayStartBackwards.svg" id="2_ri6b2"]
+[ext_resource type="Texture2D" uid="uid://yqf0fr158pvs" path="res://Assets/Icons/Pause.svg" id="3_ir8qq"]
+[ext_resource type="Texture2D" uid="uid://d1sforssd4s8e" path="res://Assets/Icons/PlayStart.svg" id="4_cq50u"]
+[ext_resource type="Texture2D" uid="uid://dko20ib3j3yxc" path="res://Assets/Icons/Play.svg" id="5_61w4v"]
+
+[node name="DemoReader" type="Control" unique_id=1370253680]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DemoServer" type="Node" parent="." unique_id=1419210999]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1203726917]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=183466213]
+layout_mode = 2
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=2066141334]
+custom_minimum_size = Vector2(512, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=531330506]
+layout_mode = 2
+
+[node name="Slider" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=861682165]
+layout_mode = 2
+alignment = 1
+
+[node name="DemoSlider" type="HSlider" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Slider" unique_id=147282262]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Labels" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=683099188]
+layout_mode = 2
+
+[node name="LeftLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Labels" unique_id=1771769053]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+text = "0:00:00"
+
+[node name="CenterLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Labels" unique_id=2030856521]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Demo Title"
+
+[node name="RightLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Labels" unique_id=621133016]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+text = "0:00:00"
+
+[node name="Buttons" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=2097968379]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayBackwards" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Buttons" unique_id=1706313234]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("1_a0ses")
+
+[node name="PlayStartBackwards" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Buttons" unique_id=586145056]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("2_ri6b2")
+
+[node name="PauseStopButton" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Buttons" unique_id=268650396]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("3_ir8qq")
+
+[node name="PlayStart" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Buttons" unique_id=1051359839]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("4_cq50u")
+
+[node name="Play" type="Button" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/Buttons" unique_id=1433820971]
+unique_name_in_owner = true
+layout_mode = 2
+icon = ExtResource("5_61w4v")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer" unique_id=1109085742]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="In Character" type="PanelContainer" parent="VBoxContainer/HSplitContainer" unique_id=1313656945]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/In Character" unique_id=1723110781]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/In Character/VBoxContainer" unique_id=1168634409]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ICLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/In Character/VBoxContainer/MarginContainer" unique_id=94615192]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/In Character/VBoxContainer" unique_id=167752527]
+layout_mode = 2
+text = "In-Charater Logs"
+
+[node name="Out Of Character" type="PanelContainer" parent="VBoxContainer/HSplitContainer" unique_id=454269336]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/Out Of Character" unique_id=183427714]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/Out Of Character/VBoxContainer" unique_id=1017920200]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="OOCLogs" type="RichTextLabel" parent="VBoxContainer/HSplitContainer/Out Of Character/VBoxContainer/MarginContainer" unique_id=881353078]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 2
+scroll_following = true
+context_menu_enabled = true
+selection_enabled = true
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/Out Of Character/VBoxContainer" unique_id=1104772718]
+layout_mode = 2
+text = "Out-Of-Character Logs"
+
+[node name="DemoFileDialog" type="FileDialog" parent="." unique_id=303651241]
+unique_name_in_owner = true
+oversampling_override = 1.0
