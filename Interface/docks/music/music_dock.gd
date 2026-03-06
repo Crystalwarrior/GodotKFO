@@ -9,6 +9,8 @@ extends PanelContainer
 
 @onready var stop_button: Button = %StopButton
 
+# TODO: put this OUTSIDE the music dock as it should only be responsible for
+# its own interface
 @onready var music_manager: MusicManager = %MusicManager
 
 @onready var time_elapsed: Label = %TimeElapsed
@@ -29,10 +31,10 @@ func _ready() -> void:
 	stop_button.pressed.connect(_on_stop_button_pressed)
 	preview_button.toggled.connect(_on_preview_button_toggled)
 	music_list.item_activated.connect(_on_music_list_item_activated)
-	
+
 	music_scrubber.drag_started.connect(_on_music_scrubber_drag_started)
 	music_scrubber.drag_ended.connect(_on_music_scrubber_drag_ended)
-	
+
 	# Quality of Life
 	expand_button.pressed.connect(_on_expand_button_pressed)
 	collapse_button.pressed.connect(_on_collapse_button_pressed)
@@ -105,8 +107,12 @@ func _on_preview_button_toggled(toggled_on: bool) -> void:
 		play_song(Globals.current_song)
 
 func _on_music_list_item_activated() -> void:
-	var selected = music_list.get_selected().get_metadata(0)
-	request_play_song(selected)
+	var selected: TreeItem = music_list.get_selected()
+	if selected.get_child_count() > 0:
+		selected.set_collapsed_recursive(not selected.collapsed)
+		return
+	var selected_song = selected.get_metadata(0)
+	request_play_song(selected_song)
 
 func _on_music_scrubber_drag_started() -> void:
 	seeking = true
