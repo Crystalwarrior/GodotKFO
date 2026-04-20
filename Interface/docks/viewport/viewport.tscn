@@ -16,7 +16,6 @@ grow_vertical = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_e1eed")
-aspect_ratio = null
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="." unique_id=1365430751]
 unique_name_in_owner = true
