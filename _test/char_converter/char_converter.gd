@@ -3,9 +3,9 @@ extends Control
 @onready var file_dialog: FileDialog = %FileDialog
 @onready var convert_button: Button = %ConvertButton
 @onready var emote_list: ItemList = %EmoteList
-@onready var aspect_ratio_container: AspectRatioContainer = $HBoxContainer/AspectRatioContainer
-@onready var preview_node: Node2D = $"HBoxContainer/AspectRatioContainer/Preview Node"
+@onready var char_container: AspectRatioContainer = %CharContainer
 @onready var preview_texture_rect: TextureRect = %PreviewTextureRect
+@onready var emote_container: VBoxContainer = $EmoteContainer
 
 @export var preview_height: float = 1.0
 
@@ -100,4 +100,8 @@ func _on_emote_selected(idx: int):
 	var image_texture: ImageTexture = ImageTexture.new()
 	image_texture.set_image(image)
 	preview_texture_rect.texture = image_texture
-	preview_node.calc_preview_height()
+	#preview_node.calc_preview_height()
+
+
+func _on_emotes_visible_pressed() -> void:
+	emote_container.visible = !emote_container.visible
