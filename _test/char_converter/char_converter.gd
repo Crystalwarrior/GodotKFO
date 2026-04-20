@@ -1,11 +1,15 @@
 extends Control
 
 @onready var file_dialog: FileDialog = %FileDialog
+@onready var char_icon_file_dialog: FileDialog = %CharIconFileDialog
 @onready var convert_button: Button = %ConvertButton
 @onready var emote_list: ItemList = %EmoteList
 @onready var char_container: AspectRatioContainer = %CharContainer
 @onready var preview_texture_rect: TextureRect = %PreviewTextureRect
-@onready var emote_container: VBoxContainer = $EmoteContainer
+@onready var showname_edit: LineEdit = %ShownameEdit
+@onready var character_icon: TextureRect = %"Character Icon"
+@onready var char_icon_load_button: Button = $"Left Menu/MenuList/CharacterFold/Character/CharIconLoadButton"
+
 
 @export var preview_height: float = 1.0
 
@@ -45,20 +49,39 @@ var current_char_folder
 func _ready() -> void:
 	convert_button.pressed.connect(_on_convert_button_pressed)
 	file_dialog.file_selected.connect(_on_file_selected)
+	char_icon_load_button.pressed.connect(_on_charIconLoad_button_pressed)
+	char_icon_file_dialog.file_selected.connect(load_char_icon_from_filepath)
 	emote_list.item_selected.connect(_on_emote_selected)
 
 func _on_convert_button_pressed() -> void:
 	file_dialog.popup_centered()
 
-func _on_file_selected(path: String) -> void:
-	var char_folder = path.get_base_dir()
-	print(char_folder)
+func _on_charIconLoad_button_pressed() -> void:
+	char_icon_file_dialog.popup_centered()
 
+func _on_file_selected(path: String) -> void:
+	current_char_folder = path.get_base_dir()
+	print(current_char_folder)
+
+	load_char_icon_from_filepath(current_char_folder + "/char_icon.png")
+	load_emotes_from_ini(path)
+	regenerate_buttons()
+
+func load_char_icon_from_filepath(iconPath: String) -> void:
+	var image = Image.new()
+	image.load(iconPath)
+	var image_texture: ImageTexture = ImageTexture.new()
+	image_texture.set_image(image)
+	character_icon.texture = image_texture
+
+func load_emotes_from_ini(iniPath: String) -> void:
 	current_emotes.clear()
-	var file = FileAccess.open(path, FileAccess.READ)
+	var file = FileAccess.open(iniPath, FileAccess.READ)
 	var data: Dictionary[String, Dictionary] = BasicIni.parse(file.get_as_text())
 	for section in data:
 		print(section)
+		if section.to_lower() == "options":
+			print(data[section])
 		if section.to_lower() == "emotions":
 			var emotions = data[section]
 			for key in emotions:
@@ -68,15 +91,12 @@ func _on_file_selected(path: String) -> void:
 				print(key, ' = ', value)
 				var emote_args: PackedStringArray = value.split("#", true, 4)
 				if emote_args.size() < 4:
-					push_warning("Misformatted char.ini: ", char_folder, ", ", key, " = ", value)
+					push_warning("Misformatted char.ini: ", current_char_folder, ", ", key, " = ", value)
 					continue
 				# desk mod is not always included
 				emote_args.resize(5)
 				var emote: Emote = Emote.new(emote_args[0], emote_args[1], emote_args[2], emote_args[3], emote_args[4])
-				current_emotes.append(emote)
-
-	current_char_folder = char_folder
-	regenerate_buttons()
+				current_emotes.append(emote)	
 
 
 func regenerate_buttons():
@@ -101,7 +121,3 @@ func _on_emote_selected(idx: int):
 	image_texture.set_image(image)
 	preview_texture_rect.texture = image_texture
 	#preview_node.calc_preview_height()
-
-
-func _on_emotes_visible_pressed() -> void:
-	emote_container.visible = !emote_container.visible
