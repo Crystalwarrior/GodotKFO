@@ -157,7 +157,7 @@ layout_mode = 2
 
 [node name="ShownameLabel" type="Label" parent="Left Menu/MenuList/CharacterFold/Character/ShownameContainer" unique_id=1629216759]
 layout_mode = 2
-text = "Showname"
+text = "Showname "
 
 [node name="ShownameEdit" type="LineEdit" parent="Left Menu/MenuList/CharacterFold/Character/ShownameContainer" unique_id=1468560990]
 unique_name_in_owner = true

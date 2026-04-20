@@ -62,9 +62,18 @@ func _on_charIconLoad_button_pressed() -> void:
 func _on_file_selected(path: String) -> void:
 	current_char_folder = path.get_base_dir()
 	print(current_char_folder)
-
+	var file = FileAccess.open(path, FileAccess.READ)
+	var data: Dictionary[String, Dictionary] = BasicIni.parse(file.get_as_text())
+	for section in data:
+		print(section)
+		if section.to_lower() == "options":
+			print(data[section])
+			if data[section].keys().has("showname"):
+				showname_edit.text = data[section]["showname"]
+		if section.to_lower() == "emotions":
+			var emotions = data[section]
+			load_emotes_from_ini(emotions)
 	load_char_icon_from_filepath(current_char_folder + "/char_icon.png")
-	load_emotes_from_ini(path)
 	regenerate_buttons()
 
 func load_char_icon_from_filepath(iconPath: String) -> void:
@@ -74,29 +83,21 @@ func load_char_icon_from_filepath(iconPath: String) -> void:
 	image_texture.set_image(image)
 	character_icon.texture = image_texture
 
-func load_emotes_from_ini(iniPath: String) -> void:
+func load_emotes_from_ini(emoteDict: Dictionary) -> void:
 	current_emotes.clear()
-	var file = FileAccess.open(iniPath, FileAccess.READ)
-	var data: Dictionary[String, Dictionary] = BasicIni.parse(file.get_as_text())
-	for section in data:
-		print(section)
-		if section.to_lower() == "options":
-			print(data[section])
-		if section.to_lower() == "emotions":
-			var emotions = data[section]
-			for key in emotions:
-				if key.to_lower() == "number":
-					continue
-				var value: String = emotions[key]
-				print(key, ' = ', value)
-				var emote_args: PackedStringArray = value.split("#", true, 4)
-				if emote_args.size() < 4:
-					push_warning("Misformatted char.ini: ", current_char_folder, ", ", key, " = ", value)
-					continue
-				# desk mod is not always included
-				emote_args.resize(5)
-				var emote: Emote = Emote.new(emote_args[0], emote_args[1], emote_args[2], emote_args[3], emote_args[4])
-				current_emotes.append(emote)	
+	for key in emoteDict:
+		if key.to_lower() == "number":
+			continue
+		var value: String = emoteDict[key]
+		print(key, ' = ', value)
+		var emote_args: PackedStringArray = value.split("#", true, 4)
+		if emote_args.size() < 4:
+			push_warning("Misformatted char.ini: ", current_char_folder, ", ", key, " = ", value)
+			continue
+		# desk mod is not always included
+		emote_args.resize(5)
+		var emote: Emote = Emote.new(emote_args[0], emote_args[1], emote_args[2], emote_args[3], emote_args[4])
+		current_emotes.append(emote)	
 
 
 func regenerate_buttons():
