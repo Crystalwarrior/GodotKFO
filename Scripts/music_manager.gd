@@ -31,6 +31,10 @@ func play_track(path: String, target_volume: float = 1.0, duration: float = 1.0,
 					# time in seconds at which the stream starts after being looped
 					if "loop_offset" in new_stream.tags:
 						new_stream.loop_offset = float(new_stream.tags["loop_offset"])
+			"opus":
+				new_stream = AudioStreamOpus.load_from_file(path)
+				if new_stream:
+					new_stream.loop = true
 			"wav":
 				new_stream = AudioStreamWAV.load_from_file(path)
 				if new_stream:
@@ -81,7 +85,7 @@ func load_stream_params(stream: AudioStream, path: String) -> void:
 	# We're only interested in the params section
 	if "params" not in config.get_sections():
 		return
-	if stream is AudioStreamMP3 or stream is AudioStreamOggVorbis:
+	if stream is AudioStreamMP3 or stream is AudioStreamOggVorbis or stream is AudioStreamOpus:
 		stream.loop_offset = config.get_value("params", "loop_offset")
 		stream.bpm = config.get_value("params", "bpm")
 		stream.bar_beats = config.get_value("params", "bar_beats")
