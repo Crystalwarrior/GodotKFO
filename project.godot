@@ -46,3 +46,7 @@ folder_colors={
 "res://RefCounted/": "pink",
 "res://Scripts/": "yellow"
 }
+
+[global_group]
+
+position="A position marker in a Background Scene to set the camera's position to."

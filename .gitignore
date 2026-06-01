@@ -3,3 +3,4 @@
 /android/
 # VSCode specific ignores
 .vscode/
+Assets/_test/
